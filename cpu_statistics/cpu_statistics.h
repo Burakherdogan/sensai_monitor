@@ -17,7 +17,7 @@ typedef enum {
 } Architecture;
 
 // Function to retrieve the current clock speed of the CPU.
-int show_clock_speed();
+double show_clock_speed();
 // Function to retrieve the current temperature of the CPU.
 int show_temp();
 // Function to retrieve the current voltage of the CPU.
