@@ -24,8 +24,8 @@ int show_temp();
 int show_voltage();
 // Function to retrieve the current CPU usage rate.
 int show_usage_rate();
-// Function to retrieve the number of threads in the CPU.
-int show_thread();
+// Function to retrieve the number of cores in the CPU.
+int show_cores();
 // Function to retrieve information about CPU cache. 
 int show_cache();
 // Function to retrieve the architecture of the CPU.
