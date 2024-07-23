@@ -1,4 +1,6 @@
+#include "cpu_statistics/cpu_statistics.h"
+#include <stdio.h>
 int main(){
 
-	return NULL;
+printf("Clock Speed is: %lf\n", show_clock_speed());
 }
