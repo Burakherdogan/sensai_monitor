@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/utsname.h>
 
 #define MAX_LINE_LENGTH 256
 
@@ -99,11 +100,11 @@ int show_voltage(){
  * Returns the CPU usage rate as a percentage.
  * Returns -1 if the file cannot be opened or if reading fails.
  */
-int show_usage_rate() {
+double show_usage_rate() {
     FILE *fp;
     char line[MAX_LINE_LENGTH];
     int user, nice, system, idle;
-    int total_time, usage_rate;
+    double total_time, usage_rate;
 
     // Open the /proc/stat file for reading
     fp = fopen("/proc/stat", "r");
@@ -119,7 +120,7 @@ int show_usage_rate() {
             total_time = user + nice + system + idle;
 
             // Calculate the CPU usage rate as a percentage
-            usage_rate = ((total_time - idle) * 100) / total_time;
+            usage_rate = ((total_time - idle) * 100.0) / total_time;
 
             fclose(fp);
             return usage_rate;
@@ -139,7 +140,7 @@ int show_usage_rate() {
 int show_cores() {
     FILE *fp;
     int cores = 0;
-    char line[256];
+    char line[MAX_LINE_LENGTH];
 
     // Open the /proc/cpuinfo file for reading
     fp = fopen("/proc/cpuinfo", "r");
@@ -160,4 +161,47 @@ int show_cores() {
 
     // Return the total number of CPU cores
     return cores;
+}
+
+/* Function to retrieve the current caches in the CPU
+ *
+ *
+ *
+ *
+ */
+int show_cache(){
+   FILE *fp;
+   int cache = 0;
+   char line[MAX_LINE_LENGTH];
+
+   fp = fopen("/proc/cpuinfo","r");
+   if (fp == NULL) {
+	   perror("Error opening /proc/cpuinfo");
+	   return -1;
+   }
+
+   while (fgets(line, sizeof(line), fp)){
+	   sscanf(line, "cache size	: %d", &cache);
+   }
+   fclose(fp);
+		  	
+
+    return cache;
+}
+
+int show_architecture(){
+	struct utsname uname_data;
+	if(uname(&uname_data) <  0){
+		perror("uname");	
+	}
+
+	printf("%s",uname_data.machine);
+	
+	return 0;
+}
+char* show_model(){
+	char* model;
+	
+
+	return model;
 }

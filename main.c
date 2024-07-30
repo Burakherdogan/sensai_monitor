@@ -9,7 +9,9 @@ while (1) {
         int clock_speed = show_clock_speed();
         int temp = show_temp();
 	int voltage = show_voltage();
-	int usage_rate = show_usage_rate();
+	double usage_rate = show_usage_rate();
+	int cores = show_cores();
+	int cache = show_cache();
 	printf("\033[H\033[J");
 	printf("   ____  ____   _   _   _____  _____     _   _____  _   _  ____   _____  ____ \n");
 	printf("  / ___||  _ \\ | | | | |  ___|| ____|   / \\ |_   _|| | | ||  _ \\ | ____|/ ___| \n");
@@ -27,8 +29,16 @@ while (1) {
 	printf("| Clock Speed is: %d MHz    |", clock_speed);
 	}
 	printf("| Temperature : %d            |",temp);
-	printf("| Voltage : %d  V          |",voltage);
-	printf("| Usage rate : %d             |\n",usage_rate);
+	printf("| Voltage : %d mV          |",voltage);
+	printf("| Cores Count: %d             |\n",cores);
+	printf("|-----------------------------|");
+        printf("|-----------------------------|");
+        printf("|-----------------------------|");
+        printf("|-----------------------------|\n");
+	printf("| Cache :    %d MB         |", cache);
+	printf("| Architecture:         ");
+	show_architecture();
+	printf("|| Usage rate :    %lf  %     |\n",usage_rate);
 	printf("|-----------------------------|");
         sleep(1); 
     }
